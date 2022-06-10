@@ -1,46 +1,109 @@
-# Advanced Sample Hardhat Project
+# VNext Dex v2 Contract
+  
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+## Dependencies
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+  
 
-Try running some of the following tasks:
+* Node v16.3.0
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+* Hardhat 2.9.9
+
+  
+
+## How to build?
+
+  
+
+* Install npm packages, run the below command:
 ```
 
-# Etherscan verification
+yarn install
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
-
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
-
-```shell
-hardhat run --network ropsten scripts/deploy.ts
 ```
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
-
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
+* Compile solidity files:
 ```
 
-# Performance optimizations
+yarn compile
 
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+```
+
+
+  
+
+## How to test?
+
+  
+
+* Run the below command:
+```
+
+yarn test
+
+```
+
+  
+
+## How to deploy?
+
+  
+
+* Copy & modify environment variables:
+```
+
+cp .env.example .env
+
+```
+
+It looks like:
+
+```
+
+ETHERSCAN_API_KEY=ABC123ABC123ABC123ABC123ABC123ABC1
+KOVAN_ETHERSCAN=https://kovan.etherscan.io/
+BSCSCAN_TESTNET=https://testnet.bscscan.com/
+BSC_TESTNET_RPC=https://data-seed-prebsc-1-s1.binance.org:8545
+BSC_MAINNET_RPC=https://bsc-dataseed1.binance.org/
+KEY_TESTNET=0xabc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abc1
+KEY_MAINNET=0xabc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abc1
+
+```
+
+  
+
+* Deploy contracts, run the below commands:
+
+```
+
+npx hardhat run --network <bsc | tbsc | kovan> scripts/<file_name>
+
+```
+or
+```
+
+yarn deploy:<local | dev | staging | prod> scripts/<file_name>
+
+```
+
+  
+
+* Verify contracts:
+
+```
+
+npx hardhat verify --network <bsc | tbsc | kovan> <contract_address> <input_parameters>
+
+```
+
+  
+
+or
+
+  
+
+```
+
+yarn verify:<local | dev | staging | prod> <contract_address> <input_parameters>
+
+```
