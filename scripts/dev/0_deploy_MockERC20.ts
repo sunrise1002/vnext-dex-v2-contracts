@@ -7,14 +7,15 @@ async function main() {
   let name: string = 'token1';
   let symbol: string = 'TOKEN1';
   const supply: number = 0;
+  let max: number = 0;
 
   const contracts = await getContracts()[network.name];
   const contractsName = Object.keys(contracts);
   for (const contractName of contractsName) {
     if (contractName.match(/^token\d/g)) {
-      name = 'token' + (+contractName.replace(/[^0-9]/g,'') + 1);
+      max = Math.max(max, +contractName.replace(/[^0-9]/g,'') + 1)
+      name = 'token' + max;
       symbol = name.toUpperCase();
-      break;
     }
   }
 
